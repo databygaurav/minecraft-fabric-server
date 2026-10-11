@@ -110,6 +110,8 @@ This address works on the PC running the server.
 
 ## 9. Let your friend join
 
+**[Full playit.gg setup guide](docs/playit-setup.md)** — follow this if you are setting it up for the first time.
+
 Download and open [playit.gg](https://playit.gg/). Follow its sign-in instructions and create a **Minecraft Java tunnel** pointing to:
 
 ```text

@@ -1,5 +1,7 @@
 # Networking
 
+New to playit? Start with the [simple setup guide](playit-setup.md).
+
 On the host, connect to `localhost:25565`. For another machine on the same LAN, use the host's private LAN address and an appropriately scoped Windows Firewall rule if required. Keep actual addresses private. Leave `server-ip=` empty unless you understand a specific binding requirement.
 
 For the remote friend, use [playit.gg's official agent and support](https://playit.gg/support/). Sign in and claim the agent privately. Create a Minecraft Java/TCP tunnel targeting `127.0.0.1:25565` when the agent runs on the server host. Keep both the agent and server running, then share the assigned endpoint privately. Use the assigned external port when required; it may differ from 25565. Test from the other house after localhost succeeds.
