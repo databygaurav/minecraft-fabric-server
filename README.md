@@ -1,6 +1,6 @@
 # How I made my Minecraft server
 
-I wanted to play Minecraft with my friend using our old Aternos world. I moved the world to my Windows PC and used **playit.gg** so my friend could join from another house.
+I moved the world to my Windows PC and used **playit.gg** so my friend could join from another house.
 
 My setup: **Minecraft 26.3 · Fabric 0.19.5 · Java 25 · 4 GB server RAM · 2 players**.
 
