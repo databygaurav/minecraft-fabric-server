@@ -2,6 +2,8 @@
 
 A Windows-hosted, two-player Minecraft Java survival server: an existing Aternos world, Fabric, and a playit.gg tunnel connecting friends in different homes. This repository records the build and supplies conservative management scripts. The world and runtime stay outside Git.
 
+**Start here: [How I made my server — ten-step walkthrough](docs/how-i-built-it.md).** This follows the owner's setup notes, from creating the folder to connecting a friend, with safer reproduction instructions where needed.
+
 ## Build story and verified baseline
 
 The owner installed Temurin, installed Fabric, allocated a 4 GB server heap, moved an existing world from Aternos, configured a whitelist and Hard difficulty, and tested remote play through playit.gg. World progress and successful multiplayer are owner-reported; no gameplay test was performed while preparing this repository.
