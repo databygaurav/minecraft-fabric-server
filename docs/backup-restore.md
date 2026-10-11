@@ -1,0 +1,15 @@
+# Backups and restoration
+
+These tools use **stopped-server backups**, not live `save-off` copies. Type `stop` in the server console and wait for Java to exit. Close Java clients too. Disable scheduled restarts and keep other launchers closed for the whole operation. `stop.ps1` is a shutdown guide/waiter, not remote control.
+
+`backup.ps1` copies every world entry except the ephemeral `session.lock` into `BACKUP-ID/world`, writes a SHA-256 manifest, and checks the source before/after plus the destination. A `.partial` directory is renamed only after verification succeeds. Failed partial copies remain for inspection; they must not be restored. No backups are pruned automatically.
+
+Snapshots include player inventories and all dimensions stored under the selected world. They do **not** include server properties, mods, whitelist, OP list, or authentication databases outside the world. Keep separate private backups of those files and exact version records for disaster recovery. Never put those private copies into this Git repository. Copy completed snapshots to a second disk or encrypted off-device storage and test recovery periodically; a second folder on the same disk does not protect against disk failure.
+
+`restore.ps1 -WhatIf` verifies a snapshot without writing the destination. Actual restore asks for PowerShell confirmation and the literal text `RESTORE`. Even `-Confirm:$false` does not bypass that second prompt. The script stages and hashes the restored world first, moves the existing world to `.rollback-<id>`, then moves the staged world into place. If the final move fails, it attempts to put the previous world back. Nothing is automatically deleted.
+
+After restoration, test inventories, builds and dimensions privately before reopening the tunnel. Keep the rollback directory until satisfied. To recover manually from an interruption, keep the server stopped, inspect `.restore-*` and `.rollback-*`, and restore the intended directory to the configured world name only after preserving every candidate. Disk or permission failures may require manual recovery; do not restart with a missing world or Minecraft may generate a new one.
+
+Limits: SHA-256 detects accidental changes, not malicious replacement of both files and manifest. Only restore trusted private snapshots. Reparse points are rejected. The lock coordinates these scripts only; an unrelated launcher can still race maintenance. The process guard conservatively blocks all standard Java processes and checks world locks, but renamed Java executables or external launchers are unsupported. Full snapshots require adequate space; restore can require space for both the current and restored world.
+
+For automation, Windows Task Scheduler may invoke `backup.ps1` after a planned clean shutdown using an account with access to the runtime and private backup directory. If Java is running, the job fails safely. Scheduling this script alone will not stop the server. Use its exit status and inspect results; do not schedule forced shutdowns.

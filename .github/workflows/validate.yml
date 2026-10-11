@@ -1,0 +1,21 @@
+name: Validate Windows scripts
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        shell: [powershell, pwsh]
+    defaults:
+      run:
+        shell: '${{ matrix.shell }}'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate configuration and syntax
+        run: .\tests\validate-config.ps1
+      - name: Test synthetic backup and restore
+        run: .\tests\test-scripts.ps1
